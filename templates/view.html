@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>createFolder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark text-left navigation-clean-button">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Scamhub</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-right" id="navcol-2">
+                <span class="ml-auto navbar-text actions">
+                    {% if session['user'] %}
+                    <a class="login" href="{{ url_for('create') }}">Create Repository</a>
+                    <a class="login" href="{{ url_for('repositories') }}">Repositories</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('logout') }}" style="background: rgb(231,91,12);">Log Out</a>
+                    {% else %}
+                    <a class="login" href="{{ url_for('login') }}">Log In</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('signup') }}">Sign Up</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <style>
+    .zoom{
+        color: inherit;
+        text-decoration: none;
+    }
+    .zoom:hover{
+        text-decoration: none;
+    }
+    </style>
+    <div style="margin-top: 30px;border-width: 1px;border-style: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8" style="border-width: 1px;border-style: solid;">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <div>
+                            <iframe class="embed-responsive-item" src="{{ url_for('static', filename=data['path']) }}"></iframe>
+                        </div>
+                    </div>
+                    <a class="zoom" href="{{ url_for('static', filename=data['path']) }}" download>
+                        <div class="col d-lg-flex justify-content-lg-end align-items-lg-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-download" data-bs-hover-animate="pulse">
+                                <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"></path>
+                                <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"></path>
+                            </svg>
+                            &nbspDownload
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4" style="border-width: 1px;border-style: solid;">
+                    <div>
+                        <div class="row">
+                            <div class="col">
+                                <h3 style="margin-top: 5px;">History</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-lg-flex justify-content-lg-end">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in data['logs'] %}
+                                    <tr>
+                                        <td>{{ i }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/view.js') }}"></script>
+</body>
+
+</html>

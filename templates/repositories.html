@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Repositories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/repositories.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark text-left navigation-clean-button">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Scamhub</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-right" id="navcol-2">
+                <span class="ml-auto navbar-text actions">
+                    {% if session['user'] %}
+                    <a class="login" href="{{ url_for('create') }}">Create Repository</a>
+                    <a class="login" href="{{ url_for('repositories') }}">Repositories</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('logout') }}" style="background: rgb(231,91,12);">Log Out</a>
+                    {% else %}
+                    <a class="login" href="{{ url_for('login') }}">Log In</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('signup') }}">Sign Up</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="team-boxed">
+        <div class="container">
+            <div class="intro">
+                <h2 class="display-4 text-center">Repositories</h2>
+            </div>
+            <div class="row people">
+                <div class="col item">
+                    <style>
+                    .zoom{
+                        color: inherit;
+                        text-decoration: none;
+                    }
+                    .zoom:hover{
+                        text-decoration: none;
+                    }
+                    </style>
+                    {% for i in range(data['repositories']|length) %}
+                    <a href="{{url_for('manage', path = data['repositories'][i]['repo_name'])}}" class="zoom">
+                        <div class="border rounded box">
+                                <h1 class="text-left name">{{ data['repositories'][i]['repo_name'] }}</h1>
+                            <h5 class="text-right name">{{ data['repositories'][i]['repo_owner'] }}</h5>
+                            <p class="text-left description">{{ data['repositories'][i]['repo_description'] }}</p>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/repositories.js') }}"></script>
+</body>
+
+</html>

@@ -10,6 +10,7 @@ A dummy version of GitHub for code management and version control for OOADSE LAB
  - json
  - datetime
   
+## Setting up the Server
 ### Setting up Flask:
 - Installing Flask
 https://flask.palletsprojects.com/en/1.1.x/installation/

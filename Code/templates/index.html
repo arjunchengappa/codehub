@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark text-left navigation-clean-button">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Codehub</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-right" id="navcol-2">
+                <span class="ml-auto navbar-text actions">
+                    {% if session['user'] %}
+                    <a class="login" href="{{ url_for('create') }}">Create Repository</a>
+                    <a class="login" href="{{ url_for('repositories') }}">Repositories</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('logout') }}" style="background: rgb(231,91,12);">Log Out</a>
+                    {% else %}
+                    <a class="login" href="{{ url_for('login') }}">Log In</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('signup') }}">Sign Up</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

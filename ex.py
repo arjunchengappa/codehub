@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, select
 
-engine = create_engine('sqlite:///scamhub.db', echo = True)
+engine = create_engine('sqlite:///Codehub.db', echo = True)
 meta = MetaData()
 conn = engine.connect()
 
@@ -36,5 +36,8 @@ meta.create_all(engine)
 import os
 import shutil
 dir = os.getcwd() + '/static/root'
+shutil.rmtree(dir)
+os.mkdir(dir)
+dir = os.getcwd() + '/static/img/profile'
 shutil.rmtree(dir)
 os.mkdir(dir)

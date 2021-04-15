@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>creteRepo2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/createRepo2.css') }}">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark text-left navigation-clean-button">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Codehub</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-right" id="navcol-2">
+                <span class="ml-auto navbar-text actions">
+                    {% if session['user'] %}
+                    <a class="login" href="{{ url_for('create') }}">Create Repository</a>
+                    <a class="login" href="{{ url_for('repositories') }}">Repositories</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('logout') }}" style="background: rgb(231,91,12);">Log Out</a>
+                    {% else %}
+                    <a class="login" href="{{ url_for('login') }}">Log In</a>
+                    <a class="btn btn-light action-button" role="button" href="{{ url_for('signup') }}">Sign Up</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="register-photo">
+        <div class="form-container" style="width: 50%;" action="{{ url_for('contributors') }}">
+            <form method="post" style="/*width: 50%;*/">
+                <h2 class="text-center"><strong>Add</strong> Contributors.</h2>
+                {% if data['error_contributor'] %}
+                <div class="alert alert-danger" role="alert"><span>The following contributor/s don't exist <br><strong>{% for i in data['error_contributor']%} {{ i }} {% endfor %}</strong></span></div>
+                {% endif %}
+                {% for i in range(data['numContributors'] | int) %}
+                <div class="form-group"><input required class="form-control" type="text" name="name{{ i }}" placeholder="Contributor {{ i+1 }}" style="margin-bottom: 3px;"></div>
+                {% endfor %}
+                <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Add Contributors</button></div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

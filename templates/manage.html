@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-dark navbar-expand-md bg-dark text-left navigation-clean-button">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Scamhub</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Codehub</a>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-2">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,15 @@
         text-decoration: none;
     }
     </style>
+
     <div class="register-photo">
+        {% if data['error_contributor'] %}
+        <div class="d-lg-flex justify-content-lg-center">
+            <div class="alert alert-danger" style="width:50%">
+                Invaild contributors: <strong>{{ data['error_contributor'] }}</strong>
+            </div>
+        </div>
+        {% endif %}
         <div class="d-lg-flex justify-content-lg-center">
             <h1>{{ data['repo_name'] }}</h1>
         </div>
@@ -58,17 +66,12 @@
                     </a>
                 </div>
                 <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                    <div>
-                        <div class="row">
-                            {% if data['rw']%}
-                            <a href="{{ url_for('upload_file', path=data['path']) }}" class="zoom">
-                                <div class="col d-lg-flex align-items-lg-center"><button class="btn btn-primary" type="button" style="width: 100px;background: rgb(52,58,64);border-color: rgb(52,58,64);">Upload File</button></div>
-                            </a>
-                            <a href="{{ url_for('create_folder', path=data['path']) }}" class="zoom">
-                                <div class="col d-lg-flex justify-content-lg-center"><button class="btn btn-primary" type="button" style="background: rgb(52,58,64);border-color: rgb(52,58,64);">Create <br> Folder</button></div>
-                            </a>
-                            {% endif %}
-                        </div>
+                    <div class="row">
+                        {% if data['owner']%}
+                        <a href="{{ url_for('addContributor', repo_name=data['repo_name']) }}" class="zoom">
+                            <div class="col d-lg-flex align-items-lg-center"><button class="btn btn-primary" type="button" style="width: 120px;background: rgb(52,58,64);border-color: rgb(52,58,64);">Add Contributors</button></div>
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -97,6 +100,26 @@
                             {% endfor %}
                         </tbody>
                     </table>
+                </div>
+            </div>
+            <div style="margin-bottom: 50px;">
+                <div class="row">
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                    </div>
+                    <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
+                        <div>
+                            <div class="row">
+                                {% if data['rw']%}
+                                <a href="{{ url_for('upload_file', path=data['path']) }}" class="zoom">
+                                    <div class="col d-lg-flex align-items-lg-center"><button class="btn btn-primary" type="button" style="width: 150px;background: rgb(52,58,64);border-color: rgb(52,58,64);">Upload File</button></div>
+                                </a>
+                                <a href="{{ url_for('create_folder', path=data['path']) }}" class="zoom">
+                                    <div class="col d-lg-flex justify-content-lg-center"><button class="btn btn-primary" type="button" style="width: 150px;background: rgb(52,58,64);border-color: rgb(52,58,64);">Create Folder</button></div>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
